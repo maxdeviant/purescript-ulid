@@ -49,10 +49,8 @@ toString (Ulid value) = value
 
 foreign import monotonicFactoryImpl :: Effect (Timestamp -> Effect String)
 
+-- | Returns a factory for generating monotonically-increasing ULIDs.
 monotonicFactory :: Effect (Timestamp -> Effect Ulid)
 monotonicFactory = do
   factory <- monotonicFactoryImpl
-  pure
-    $ \timestamp -> do
-        value <- factory timestamp
-        pure $ Ulid value
+  pure $ map Ulid <<< factory
