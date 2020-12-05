@@ -11,7 +11,6 @@ import Data.Function.Uncurried (Fn1, runFn1)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Effect.Class.Console (logShow)
 
 -- | A Universally Unique Lexicographically Sortable Identifier (ULID).
 newtype Ulid
