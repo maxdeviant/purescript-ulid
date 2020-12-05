@@ -1,6 +1,7 @@
 module Ulid
   ( Ulid
   , ulid
+  , toString
   ) where
 
 import Prelude
