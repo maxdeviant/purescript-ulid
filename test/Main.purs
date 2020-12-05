@@ -10,7 +10,7 @@ import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter (consoleReporter)
 import Test.Spec.Runner (runSpec)
-import Ulid (parseUlid, toString, ulid)
+import Ulid (monotonicFactory, parseUlid, toString, ulid)
 
 main :: Effect Unit
 main = do
@@ -38,3 +38,18 @@ main = do
             let
               actual = parseUlid "80000000000000000000000000"
             actual `shouldEqual` Nothing
+        describe "Ulid.monotonicFactory" do
+          it "returns a factory for generating monotonic ULIDs" do
+            factory <- liftEffect monotonicFactory
+            let
+              timestamp = 150000
+            ulid1 <- liftEffect $ factory timestamp
+            logShow ulid1
+            ulid2 <- liftEffect $ factory timestamp
+            logShow ulid2
+            ulid3 <- liftEffect $ factory timestamp
+            logShow ulid3
+            ulid4 <- liftEffect $ factory timestamp
+            logShow ulid4
+            ulid5 <- liftEffect $ factory timestamp
+            logShow ulid5

@@ -14,3 +14,13 @@ exports.parseUlidImpl = function (input) {
     return null;
   }
 };
+
+exports.monotonicFactoryImpl = function () {
+  const factory = ulid.monotonicFactory();
+
+  return function (timestamp) {
+    return function () {
+      return factory(timestamp);
+    };
+  };
+};

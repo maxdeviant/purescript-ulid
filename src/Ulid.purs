@@ -3,6 +3,7 @@ module Ulid
   , ulid
   , parseUlid
   , toString
+  , monotonicFactory
   ) where
 
 import Prelude
@@ -10,6 +11,7 @@ import Data.Function.Uncurried (Fn1, runFn1)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
+import Effect.Class.Console (logShow)
 
 -- | A Universally Unique Lexicographically Sortable Identifier (ULID).
 newtype Ulid
@@ -21,6 +23,9 @@ derive instance ordUlid :: Ord Ulid
 
 instance showUlid :: Show Ulid where
   show (Ulid value) = "(ULID " <> value <> ")"
+
+type Timestamp
+  = Int
 
 foreign import ulidImpl :: Effect String
 
@@ -42,3 +47,13 @@ parseUlid input =
 -- | Returns the string representation of the ULID.
 toString :: Ulid -> String
 toString (Ulid value) = value
+
+foreign import monotonicFactoryImpl :: Effect (Timestamp -> Effect String)
+
+monotonicFactory :: Effect (Timestamp -> Effect Ulid)
+monotonicFactory = do
+  factory <- monotonicFactoryImpl
+  pure
+    $ \timestamp -> do
+        value <- factory timestamp
+        pure $ Ulid value
