@@ -4,6 +4,10 @@ exports.ulidImpl = function () {
   return ulid.ulid();
 };
 
+exports.seededUlidImpl = function (seed) {
+  return ulid.ulid(seed);
+};
+
 exports.parseUlidImpl = function (input) {
   try {
     // We use `decodeTime` as a means to validate the ULID. If it doesn't throw

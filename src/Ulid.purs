@@ -1,6 +1,7 @@
 module Ulid
   ( Ulid
   , ulid
+  , seededUlid
   , parseUlid
   , toString
   , monotonicFactory
@@ -11,6 +12,7 @@ import Data.Function.Uncurried (Fn1, runFn1)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
+import Effect.Uncurried (EffectFn1, runEffectFn1)
 
 -- | A Universally Unique Lexicographically Sortable Identifier (ULID).
 newtype Ulid
@@ -24,13 +26,19 @@ instance showUlid :: Show Ulid where
   show (Ulid value) = "(ULID " <> value <> ")"
 
 type Timestamp
-  = Int
+  = Number
 
 foreign import ulidImpl :: Effect String
 
 -- | Generates a ULID.
 ulid :: Effect Ulid
 ulid = map Ulid ulidImpl
+
+foreign import seededUlidImpl :: EffectFn1 Timestamp String
+
+-- | Generates a ULID using the provided timestamp as the seed.
+seededUlid :: Timestamp -> Effect Ulid
+seededUlid seedTime = map Ulid <<< runEffectFn1 seededUlidImpl $ seedTime
 
 foreign import parseUlidImpl :: Fn1 String (Nullable String)
 
