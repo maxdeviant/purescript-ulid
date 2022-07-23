@@ -1,30 +1,22 @@
-const ulid = require('ulid');
+import { decodeTime, monotonicFactory, ulid } from 'ulid';
 
-exports.ulidImpl = function () {
-  return ulid.ulid();
-};
+export const ulidImpl = () => ulid();
 
-exports.seededUlidImpl = function (seed) {
-  return ulid.ulid(seed);
-};
+export const seededUlidImpl = seed => ulid(seed);
 
-exports.parseUlidImpl = function (input) {
+export const parseUlidImpl = input => {
   try {
     // We use `decodeTime` as a means to validate the ULID. If it doesn't throw
     // then we assume that the ULID is valid.
-    ulid.decodeTime(input);
+    decodeTime(input);
     return input;
   } catch (err) {
     return null;
   }
 };
 
-exports.monotonicFactoryImpl = function () {
-  const factory = ulid.monotonicFactory();
+export const monotonicFactoryImpl = () => {
+  const factory = monotonicFactory();
 
-  return function (timestamp) {
-    return function () {
-      return factory(timestamp);
-    };
-  };
+  return timestamp => () => factory(timestamp);
 };
