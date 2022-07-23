@@ -15,6 +15,7 @@
     "ulid": "^2.3.0"
   },
   "devDependencies": {
-    "purlin": "^0.1.8"
+    "purlin": "^0.1.8",
+    "ulid": "^2.3.0"
   }
 }
