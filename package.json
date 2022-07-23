@@ -1,6 +1,6 @@
 {
   "name": "purescript-ulid",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "main": "index.js",
   "repository": "git@github.com:maxdeviant/purescript-ulid.git",
   "author": "Marshall Bowers <elliott.codes@gmail.com>",
