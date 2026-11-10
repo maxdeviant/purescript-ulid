@@ -1,0 +1,21 @@
+package:
+  name: ulid
+  publish:
+    version: 3.0.2
+    license: MIT
+    location:
+      githubOwner: maxdeviant
+      githubRepo: purescript-ulid
+  dependencies:
+    - effect: ">=4.0.0 <5.0.0"
+    - functions: ">=6.0.0 <7.0.0"
+    - maybe: ">=6.0.0 <7.0.0"
+    - nullable: ">=6.0.0 <7.0.0"
+    - prelude: ">=6.0.0 <7.0.0"
+  test:
+    main: Test.Main
+    dependencies:
+      - aff: ">=7.0.0 <8.0.0"
+      - console: ">=6.0.0 <7.0.0"
+      - spec: ">=7.0.0 <8.0.0"
+workspace: {}
