@@ -17,6 +17,5 @@ package:
     dependencies:
       - aff: ">=7.0.0 <8.0.0"
       - console: ">=6.0.0 <7.0.0"
-      - psci-support: ">=6.0.0 <7.0.0"
       - spec: ">=7.0.0 <8.0.0"
 workspace: {}
